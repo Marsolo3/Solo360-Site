@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-brand-beige: #FAF8F5;
+  --color-brand-gold: #cfb88b;
+  --color-brand-gold-dark: #b69c6b;
+  --color-brand-dark: #121214;
+  --color-brand-card-dark: #1c1c1f;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/* ──── Base ──── */
+html {
+  scroll-behavior: smooth;
+  text-size-adjust: 100%;        /* prevent iOS font inflation */
+  -webkit-text-size-adjust: 100%;
+  height: -webkit-fill-available; /* iOS 100vh fix */
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  /* PWA / iOS polish */
+  overscroll-behavior-y: none;          /* disable pull-to-refresh browser default */
+  -webkit-overflow-scrolling: touch;    /* momentum scroll on iOS */
+  -webkit-tap-highlight-color: transparent; /* remove grey tap flash on iOS */
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
+/* ──── Safe-area padding utilities ──── */
+.safe-top    { padding-top:    env(safe-area-inset-top); }
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+.safe-left   { padding-left:   env(safe-area-inset-left); }
+.safe-right  { padding-right:  env(safe-area-inset-right); }
+
+/* ──── Touch targets ──── */
+button, a, [role="button"] {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation; /* prevent double-tap zoom on interactive elements */
+}
+
+/* ──── Scrollable containers & Custom Scrollbars ──── */
+.scroll-smooth { scroll-behavior: smooth; }
+.overflow-scroll-ios { -webkit-overflow-scrolling: touch; }
+
+/* Custom thin scrollbar matching brand gold/dark colors */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF8F5; /* brand-beige */
+}
+::-webkit-scrollbar-thumb {
+  background: #cfb88b; /* brand-gold */
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b69c6b; /* brand-gold-dark */
+}
+
+/* ──── Focus Rings for Accessibility ──── */
+*:focus-visible {
+  outline: 2px solid #cfb88b;
+  outline-offset: 4px;
+}
+
+/* ──── Selection Highlighter ──── */
+::selection {
+  background: rgba(207, 184, 139, 0.25);
+  color: #121214;
+}
+
+/* ---- Lightweight Site Animations ---- */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.55s ease-out both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out both;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.55s ease-out both;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s ease-out both;
+}
+
+.animation-delay-100 { animation-delay: 100ms; }
+.animation-delay-200 { animation-delay: 200ms; }
+.animation-delay-300 { animation-delay: 300ms; }
+.animation-delay-400 { animation-delay: 400ms; }
+.animation-delay-500 { animation-delay: 500ms; }
+.animation-delay-600 { animation-delay: 600ms; }
+
+/* Custom PWA Install prompt media query rules */
+.pwa-install-banner {
+  display: flex !important;
+}
+
+@media (min-width: 768px) {
+  .pwa-install-banner {
+    display: none !important;
+  }
+}
