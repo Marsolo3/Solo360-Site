@@ -3,7 +3,7 @@ export default function Testimonials() {
     {
       quote: "This was a great experience, the work we did together exceeded my expectations. From start to finish the whole process was easy and enjoyable.",
       author: "Mark",
-      role: "Founder and Business Coach",
+      role: "Business Coach",
     },
     {
       quote: "Very satisfied. Solo360 is very personable, communicative, and competent. They are a trusted partner who delivers what is promise on time.",

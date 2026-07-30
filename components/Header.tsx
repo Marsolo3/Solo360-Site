@@ -8,9 +8,7 @@ import { usePathname } from "next/navigation";
 const navLinks = [
   { href: "#home", label: "Home" },
   { href: "#services", label: "Services" },
-  { href: "#experience", label: "Experience" },
-  { href: "#about", label: "About" },
-  { href: "#contact", label: "Contact" },
+  { href: "#about", label: "About" }
 ];
 
 export default function Header() {
@@ -22,7 +20,7 @@ export default function Header() {
   useEffect(() => {
     if (pathname !== "/") return;
 
-    const sections = ["home", "services", "experience", "about", "contact"];
+    const sections = ["home", "services", "about"];
     const observers = sections.map((id) => {
       const el = document.getElementById(id === "home" ? "home" : id);
       if (!el) return null;
@@ -108,7 +106,7 @@ export default function Header() {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-full bg-zinc-900 px-5 py-2.5 text-xs font-semibold text-white transition-all hover:bg-zinc-800"
             >
-              Book Strategy Call
+              Book Discovery Call
             </Link>
           </div>
 

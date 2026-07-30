@@ -16,7 +16,7 @@ export default function ExperienceEnvironments() {
       desc: "Built and optimized paid ads strategies focused on conversions, efficiency, and measurable customer acquisition.",
       icon: (
         <svg className="h-8 w-8 text-brand-gold-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18L9 11.25l4.5 4.5L21 3m0 0h-5.25M21 3v5.25" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
         </svg>
       ),
     },

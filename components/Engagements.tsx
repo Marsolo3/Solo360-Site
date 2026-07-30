@@ -37,7 +37,7 @@ export default function Engagements() {
       bullets: [
         "Monthly growth planning",
         "Campaign and channel guidance",
-        "Performance analysis",
+        "Performance audits",
         "Budget and priority decisions",
         "Team and vendor coordination",
         "Execution oversight",
