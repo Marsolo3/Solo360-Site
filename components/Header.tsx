@@ -70,10 +70,10 @@ export default function Header() {
             <Image
               src="/logo-dark.svg"
               alt="Solo 360 Digital Growth Logo"
-              width={320}
-              height={80}
-              className="h-24 w-auto object-contain -my-7"
-              style={{ height: "96px", width: "auto" }}
+              width={240}
+              height={60}
+              className="h-16 w-auto object-contain"
+              style={{ height: "64px", width: "auto" }}
               priority
             />
           </Link>
@@ -168,10 +168,10 @@ export default function Header() {
           <Image
             src="/logo-dark.svg"
             alt="Solo 360 Digital Growth"
-            width={320}
-            height={80}
-            className="h-24 w-auto object-contain -my-7"
-            style={{ height: "96px", width: "auto" }}
+            width={240}
+            height={60}
+            className="h-16 w-auto object-contain"
+            style={{ height: "64px", width: "auto" }}
           />
           <button
             type="button"

@@ -12,55 +12,93 @@ function QuoteForm() {
     growGoal: "",
     supportType: "Select one",
   });
+  const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent("Digital Strategy Request from Solo360 Website");
-    const body = encodeURIComponent(
-      `Name: ${fields.name}\nEmail: ${fields.email}\nCompany: ${fields.company}\nWebsite: ${fields.website}\nHow can we help: ${fields.growGoal}\nSupport Type: ${fields.supportType}`
-    );
-    window.location.href = `mailto:info@solo360.co?subject=${subject}&body=${body}`;
-    setSent(true);
+    setLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(fields),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Something went wrong. Please try again.");
+      }
+
+      setSent(true);
+    } catch (err: any) {
+      setError(err.message || "Failed to send message. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (sent) {
     return (
-      <p className="text-xs text-brand-gold font-semibold py-2">
-        Opening your email client...
-      </p>
+      <div className="flex flex-col items-center justify-center text-center py-8 px-4 space-y-3">
+        <div className="h-12 w-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100 mb-2">
+          <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+          </svg>
+        </div>
+        <h3 className="text-sm font-bold text-zinc-950">Thank You!</h3>
+        <p className="text-xs text-zinc-500 leading-relaxed max-w-[240px]">
+          Your digital strategy request has been submitted successfully. We will get back to you shortly.
+        </p>
+      </div>
     );
   }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-3">
+      {error && (
+        <div className="rounded-lg bg-red-50 border border-red-200 p-3 text-xs text-red-700 leading-tight">
+          {error}
+        </div>
+      )}
       <input
         type="text" required placeholder="Name"
         value={fields.name} onChange={(e) => setFields({ ...fields, name: e.target.value })}
-        className="w-full rounded-lg border border-[#eae6db] bg-[#FAF8F5] px-3 py-2.5 text-xs text-zinc-800 placeholder-zinc-400 focus:border-brand-gold focus:outline-none transition-colors"
+        disabled={loading}
+        className="w-full rounded-lg border border-[#eae6db] bg-[#FAF8F5] px-3 py-2.5 text-xs text-zinc-800 placeholder-zinc-400 focus:border-brand-gold focus:outline-none transition-colors disabled:opacity-60"
       />
       <input
         type="email" required placeholder="Email"
         value={fields.email} onChange={(e) => setFields({ ...fields, email: e.target.value })}
-        className="w-full rounded-lg border border-[#eae6db] bg-[#FAF8F5] px-3 py-2.5 text-xs text-zinc-800 placeholder-zinc-400 focus:border-brand-gold focus:outline-none transition-colors"
+        disabled={loading}
+        className="w-full rounded-lg border border-[#eae6db] bg-[#FAF8F5] px-3 py-2.5 text-xs text-zinc-800 placeholder-zinc-400 focus:border-brand-gold focus:outline-none transition-colors disabled:opacity-60"
       />
       <div className="grid grid-cols-2 gap-2">
         <input
           type="text" placeholder="Company"
           value={fields.company} onChange={(e) => setFields({ ...fields, company: e.target.value })}
-          className="w-full rounded-lg border border-[#eae6db] bg-[#FAF8F5] px-3 py-2.5 text-xs text-zinc-800 placeholder-zinc-400 focus:border-brand-gold focus:outline-none transition-colors"
+          disabled={loading}
+          className="w-full rounded-lg border border-[#eae6db] bg-[#FAF8F5] px-3 py-2.5 text-xs text-zinc-800 placeholder-zinc-400 focus:border-brand-gold focus:outline-none transition-colors disabled:opacity-60"
         />
         <input
           type="url" placeholder="Website"
           value={fields.website} onChange={(e) => setFields({ ...fields, website: e.target.value })}
-          className="w-full rounded-lg border border-[#eae6db] bg-[#FAF8F5] px-3 py-2.5 text-xs text-zinc-800 placeholder-zinc-400 focus:border-brand-gold focus:outline-none transition-colors"
+          disabled={loading}
+          className="w-full rounded-lg border border-[#eae6db] bg-[#FAF8F5] px-3 py-2.5 text-xs text-zinc-800 placeholder-zinc-400 focus:border-brand-gold focus:outline-none transition-colors disabled:opacity-60"
         />
       </div>
       <textarea
         rows={3} required placeholder="How can we help? (Tell us about your challenge)"
         value={fields.growGoal} onChange={(e) => setFields({ ...fields, growGoal: e.target.value })}
-        className="w-full rounded-lg border border-[#eae6db] bg-[#FAF8F5] px-3 py-2.5 text-xs text-zinc-800 placeholder-zinc-400 focus:border-brand-gold focus:outline-none transition-colors resize-none"
+        disabled={loading}
+        className="w-full rounded-lg border border-[#eae6db] bg-[#FAF8F5] px-3 py-2.5 text-xs text-zinc-800 placeholder-zinc-400 focus:border-brand-gold focus:outline-none transition-colors resize-none disabled:opacity-60"
       />
       <div className="relative">
         <label className="block text-[9px] font-bold text-zinc-400 uppercase tracking-wider mb-1">
@@ -68,8 +106,9 @@ function QuoteForm() {
         </label>
         <button
           type="button"
-          onClick={() => setDropdownOpen(!dropdownOpen)}
-          className="w-full text-left rounded-lg bg-[#FAF8F5] border border-[#eae6db] px-3 py-2.5 text-xs text-zinc-800 focus:border-brand-gold focus:outline-none transition-all flex items-center justify-between cursor-pointer"
+          onClick={() => !loading && setDropdownOpen(!dropdownOpen)}
+          disabled={loading}
+          className="w-full text-left rounded-lg bg-[#FAF8F5] border border-[#eae6db] px-3 py-2.5 text-xs text-zinc-800 focus:border-brand-gold focus:outline-none transition-all flex items-center justify-between cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
         >
           <span>{fields.supportType}</span>
           <svg
@@ -79,7 +118,7 @@ function QuoteForm() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
           </svg>
         </button>
-        {dropdownOpen && (
+        {dropdownOpen && !loading && (
           <div className="absolute left-0 right-0 mt-1 rounded-lg bg-white border border-[#eae6db] shadow-lg z-50 overflow-hidden">
             {["Select one", "Growth Strategy", "Hands on Execution", "Ongoing Growth Partner"].map((option) => (
               <button
@@ -99,9 +138,20 @@ function QuoteForm() {
       </div>
       <button
         type="submit"
-        className="w-full rounded-lg bg-brand-gold py-3 text-xs font-bold text-zinc-950 transition-all hover:bg-brand-gold-dark hover:scale-[1.01] min-h-[44px]"
+        disabled={loading}
+        className="w-full rounded-lg bg-brand-gold py-3 text-xs font-bold text-zinc-950 transition-all hover:bg-brand-gold-dark hover:scale-[1.01] min-h-[44px] flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
       >
-        Let&apos;s Talk
+        {loading ? (
+          <>
+            <svg className="animate-spin h-4 w-4 text-zinc-950" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+            </svg>
+            <span>Sending...</span>
+          </>
+        ) : (
+          "Let's Talk"
+        )}
       </button>
     </form>
   );

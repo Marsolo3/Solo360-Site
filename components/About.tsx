@@ -48,10 +48,7 @@ export default function About() {
 
             <div className="space-y-5 sm:space-y-6 lg:space-y-8 text-zinc-600 leading-7 sm:leading-8 lg:leading-9 text-sm sm:text-base lg:text-lg font-medium">
               <p>
-                Before founding Solo360, I worked with fast-growing startups and leading ad agencies. I saw businesses invest heavily in marketing and advertising without a clear strategy connecting it all.
-              </p>
-              <p>
-                Solo360 was created to bring those pieces together, helping businesses find clarity and drive measurable longterm growth.
+                Before founding Solo360, I worked across national advertising, performance marketing, and fast-growing startups. That experience taught me how to connect high-level strategy with practical execution, helping businesses create clearer plans, stronger marketing foundations, and more focused growth.
               </p>
             </div>
 
