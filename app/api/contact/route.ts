@@ -21,14 +21,14 @@ export async function POST(request: Request) {
       );
     }
 
-    // Set up nodemailer transporter
+    // Set up nodemailer transporter (stripping spaces from the App Password if present)
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 465,
       secure: true,
       auth: {
         user: process.env.ADMIN_EMAIL,
-        pass: process.env.EMAIL_PASSWORD,
+        pass: process.env.EMAIL_PASSWORD ? process.env.EMAIL_PASSWORD.replace(/\s+/g, "") : "",
       },
     });
 
