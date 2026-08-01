@@ -45,7 +45,7 @@ export default function Capabilities() {
         {/* Header */}
         <div className="max-w-3xl mb-12 sm:mb-16">
           <div className="text-xs font-bold uppercase tracking-widest text-brand-gold mb-4">
-            Capabilities
+            Services
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight mb-5 sm:mb-6">
             Built Around Your Goals

@@ -13,7 +13,7 @@ export default function FinalCTA() {
                 Get Clarity
               </span>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight mt-3 mb-3 sm:mb-4">
-                Digital Growth Starts with Strategy
+                Growth Starts with Strategy
               </h2>
               <p className="text-sm font-medium text-zinc-400">
                 Get results that drive revenue.

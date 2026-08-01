@@ -12,9 +12,15 @@ export default function ContactForm() {
     supportType: "Select one",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [supportError, setSupportError] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (formData.supportType === "Select one") {
+      setSupportError(true);
+      return;
+    }
+    setSupportError(false);
     setSubmitted(true);
     // Form action can be handled later
   };
@@ -195,6 +201,7 @@ export default function ContactForm() {
                         if (el) el.classList.toggle("hidden");
                       }}
                       className="w-full text-left rounded-xl bg-brand-dark border border-zinc-800 px-4 py-3.5 text-sm text-zinc-300 focus:border-brand-gold focus:outline-none transition-all flex items-center justify-between cursor-pointer"
+                      style={supportError ? { borderColor: "#ef4444" } : undefined}
                     >
                       <span>{formData.supportType}</span>
                       <svg
@@ -216,6 +223,9 @@ export default function ContactForm() {
                           type="button"
                           onClick={() => {
                             setFormData({ ...formData, supportType: option });
+                            if (option !== "Select one") {
+                              setSupportError(false);
+                            }
                             const el = document.getElementById("support-options");
                             if (el) el.classList.add("hidden");
                           }}
@@ -227,6 +237,11 @@ export default function ContactForm() {
                       ))}
                     </div>
                   </div>
+                  {supportError && (
+                    <p className="text-red-500 text-xs mt-2 font-medium">
+                      Please select a support option.
+                    </p>
+                  )}
                 </div>
 
                 {/* Submit button */}

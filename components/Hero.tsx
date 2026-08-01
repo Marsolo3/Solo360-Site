@@ -16,9 +16,15 @@ function QuoteForm() {
   const [sent, setSent] = useState(false);
   const [error, setError] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [supportError, setSupportError] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (fields.supportType === "Select one") {
+      setSupportError(true);
+      return;
+    }
+    setSupportError(false);
     setLoading(true);
     setError("");
 
@@ -109,6 +115,7 @@ function QuoteForm() {
           onClick={() => !loading && setDropdownOpen(!dropdownOpen)}
           disabled={loading}
           className="w-full text-left rounded-lg bg-[#FAF8F5] border border-[#eae6db] px-3 py-2.5 text-xs text-zinc-800 focus:border-brand-gold focus:outline-none transition-all flex items-center justify-between cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+          style={supportError ? { borderColor: "#ef4444" } : undefined}
         >
           <span>{fields.supportType}</span>
           <svg
@@ -127,6 +134,9 @@ function QuoteForm() {
                 onClick={() => {
                   setFields({ ...fields, supportType: option });
                   setDropdownOpen(false);
+                  if (option !== "Select one") {
+                    setSupportError(false);
+                  }
                 }}
                 className={`w-full text-left px-3 py-2 text-xs transition-all hover:bg-[#FAF8F5] text-zinc-800 cursor-pointer ${fields.supportType === option ? "bg-[#fdf9f2] text-brand-gold-dark font-semibold" : ""}`}
               >
@@ -134,6 +144,11 @@ function QuoteForm() {
               </button>
             ))}
           </div>
+        )}
+        {supportError && (
+          <p className="text-red-500 text-[10px] mt-1 font-medium">
+            Please select a support type.
+          </p>
         )}
       </div>
       <button
@@ -174,7 +189,7 @@ export default function Hero() {
 
             <h1 className="text-4xl font-extrabold tracking-tight text-zinc-900 sm:text-5xl md:text-6xl lg:text-7xl leading-[1.08] mb-5 sm:mb-6">
               Growth <br className="hidden sm:inline" />
-              strategy for <br />
+              Strategy for <br />
               <span className="text-brand-gold" suppressHydrationWarning>Longterm Results</span>
             </h1>
 

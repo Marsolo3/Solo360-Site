@@ -43,7 +43,7 @@ export default function About() {
             </div>
 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-zinc-900 leading-tight mb-6 lg:mb-8">
-              Strategy Grounded in Real Execution
+              Grounded in Real Execution
             </h2>
 
             <div className="space-y-5 sm:space-y-6 lg:space-y-8 text-zinc-600 leading-7 sm:leading-8 lg:leading-9 text-sm sm:text-base lg:text-lg font-medium">

@@ -72,8 +72,8 @@ export default function Header() {
               alt="Solo 360 Digital Growth Logo"
               width={240}
               height={60}
-              className="h-16 w-auto object-contain"
-              style={{ height: "64px", width: "auto" }}
+              className="h-[51px] w-auto object-contain"
+              style={{ height: "51px", width: "auto" }}
               priority
             />
           </Link>
@@ -170,8 +170,8 @@ export default function Header() {
             alt="Solo 360 Digital Growth"
             width={240}
             height={60}
-            className="h-16 w-auto object-contain"
-            style={{ height: "64px", width: "auto" }}
+            className="h-[51px] w-auto object-contain"
+            style={{ height: "51px", width: "auto" }}
           />
           <button
             type="button"

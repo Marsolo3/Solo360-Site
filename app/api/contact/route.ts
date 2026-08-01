@@ -32,7 +32,25 @@ export async function POST(request: Request) {
       },
     });
 
-    const receiverEmail = process.env.RECEIVER_EMAIL || process.env.ADMIN_EMAIL || "info@solo360.co";
+    const receivers: string[] = [];
+    if (process.env.RECEIVER_EMAIL_1?.trim()) {
+      receivers.push(process.env.RECEIVER_EMAIL_1.trim());
+    }
+    if (process.env.RECEIVER_EMAIL_2?.trim()) {
+      receivers.push(process.env.RECEIVER_EMAIL_2.trim());
+    }
+
+    if (receivers.length === 0) {
+      if (process.env.RECEIVER_EMAIL?.trim()) {
+        receivers.push(process.env.RECEIVER_EMAIL.trim());
+      } else if (process.env.ADMIN_EMAIL?.trim()) {
+        receivers.push(process.env.ADMIN_EMAIL.trim());
+      } else {
+        receivers.push("info@solo360.co");
+      }
+    }
+
+    const receiverEmail = receivers.join(", ");
 
     // Design email contents
     const mailOptions = {

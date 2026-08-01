@@ -7,8 +7,6 @@ import { usePathname } from "next/navigation";
 const navLinks = [
   { href: "#home", label: "Home" },
   { href: "#services", label: "Services" },
-  { href: "#experience", label: "Experience" },
-  { href: "#about", label: "About" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -33,8 +31,8 @@ export default function Footer() {
               alt="Solo 360 Digital Growth"
               width={240}
               height={240}
-              className="h-24 w-auto object-contain -my-5 sm:-my-6"
-              style={{ height: "96px", width: "auto" }}
+              className="h-[67px] w-auto object-contain -my-5 sm:-my-6"
+              style={{ height: "67px", width: "auto" }}
             />
           </Link>
 

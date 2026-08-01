@@ -57,7 +57,7 @@ export default function Engagements() {
             Engagements
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-zinc-900 leading-tight mb-5 sm:mb-6">
-            Plan. Execute. Grow
+            Plan. Execute. Grow.
           </h2>
           <p className="text-base sm:text-lg leading-7 sm:leading-8 text-zinc-600">
             Every engagement begins by identifying what is limiting growth and where the strongest opportunities exist. From there, Solo360 can build the strategy, lead the execution, or support your team over time.
